@@ -1,26 +1,66 @@
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Figura {
 	// TODO Representa una figura mediante trazos echos a mano
-
+	private	LinkedList<Trazo> trazos;
+	private String nombre;
 	/**
 	 * Crea una figura con los trazos indicados
 	 * @param trazos, una secuencia de trazos
 	 */
-	public Figura(String trazos){
+	public Figura(String trazo){
 		//TODO
-
-	}
+		trazos =  new LinkedList<Trazo>();
+		for (int i = 0; i < trazo.length(); i++) {
+			switch (trazo.charAt(i)) {
+			case 'D':
+				trazos.add(new Trazo('D'));
+				break;
+			case 'B':
+				trazos.add(new Trazo('B'));
+				break;	
+			case 'I':
+				trazos.add(new Trazo('I'));
+				break;
+			case 'S':
+				trazos.add(new Trazo('S'));
+				break;
+			}
+			
+		}
+			
+		}
+	
 	
 	/**
 	 * Crea una figura con los trazos indicados y lo nombra con el nombre dado
 	 * @param trazos, una secuencia de trazos 
 	 * @param nombre, un nombre 
 	 */
-	public Figura(String trazos, String nombre){
+	public Figura(String trazo, String nombre){
 		//TODO
+		this.nombre = nombre;
+		trazos =  new LinkedList<Trazo>();
+		for (int i = 0; i < trazo.length(); i++) {
+			switch (trazo.charAt(i)) {
+			case 'D':
+				trazos.add(new Trazo('D'));
+				break;
+			case 'B':
+				trazos.add(new Trazo('B'));
+				break;	
+			case 'I':
+				trazos.add(new Trazo('I'));
+				break;
+			case 'S':
+				trazos.add(new Trazo('S'));
+				break;
+			}
 
+	}
 	}
 	
 	/**
@@ -29,7 +69,7 @@ public class Figura {
 	 */
 	public String getNombre(){
 		//TODO
-		return "";
+		return nombre;
 	}
 	
 	/**
@@ -38,7 +78,7 @@ public class Figura {
 	 */
 	public List<Trazo> getTrazos(){
 		//TODO
-		return null;
+		return trazos;
 	}
 	
 	/**
@@ -47,6 +87,22 @@ public class Figura {
 	 */
 	public void anadirTrazo(char c){
 		//TODO
+		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
+		switch (c) {
+		case 'D':
+			tr1.add(new Trazo('D'));
+			break;
+		case 'B':
+			tr1.add(new Trazo('B'));
+			break;	
+		case 'I':
+			tr1.add(new Trazo('I'));
+			break;
+		case 'S':
+			tr1.add(new Trazo('S'));
+			break;
+		}
+		
 	}
 	
 	/**
@@ -56,14 +112,51 @@ public class Figura {
 	 */
 	public void anadirTrazo(char c, boolean alInicio){
 		//TODO
-	}
+		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
+		if(alInicio = false){
+		switch (c) {
+		case 'D':
+			tr1.add(new Trazo('D'));
+			break;
+		case 'B':
+			tr1.add(new Trazo('B'));
+			break;	
+		case 'I':
+			tr1.add(new Trazo('I'));
+			break;
+		case 'S':
+			tr1.add(new Trazo('S'));
+			break;
+		}
 	
+	}else{
+		switch (c) {
+		case 'D':
+			tr1.addFirst(new Trazo('D'));
+			break;
+		case 'B':
+			tr1.addFirst(new Trazo('B'));
+			break;	
+		case 'I':
+			tr1.addFirst(new Trazo('I'));
+			break;
+		case 'S':
+			tr1.addFirst(new Trazo('S'));
+			break;
+		}	
+	}
+}
 	/**
 	 * Fusiona la figura 'f' al final de la figura actual
 	 * @param f, una figura
 	 */
 	public void fusionar(Figura f){
-		//TODO		
+		//TODO	
+		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
+		ListIterator<Trazo> Itr1= f.getTrazos().listIterator();
+		while(Itr1.hasNext()){
+			tr1.add(Itr1.next());
+		}
 	}
 	
 	/**
@@ -75,14 +168,33 @@ public class Figura {
 	 */
 	public void insertar(int pos, Figura f){
 		//TODO
+		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
+		ListIterator<Trazo> Itr1= f.getTrazos().listIterator();
+		while(Itr1.hasNext()){
+			tr1.add(pos, Itr1.next());
+			pos++;
 	}
-	
+	}
 	/**
 	 * Elimina la secuencia de trazos desde la œltima ocurrencia del trazo de tipo 'c'
 	 * @param c, un tipo de trazo
 	 */
 	public void eliminarDesdeUltimoTrazo(char c){
 		//TODO
+		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
+		ListIterator<Trazo> Itr1= tr1.listIterator();
+		Trazo trazo1 = new Trazo(c);
+		int pos = 0;
+		while(Itr1.hasNext()){
+			if(Itr1.next().equals(trazo1)){
+				pos = pos;
+			}
+			pos++;
+		}
+		for(int i = pos+1 ; i<tr1.size() ; i++){
+			tr1.remove(i);
+			
+		}
 	}
 	
 	/**
