@@ -226,9 +226,8 @@ public class Figura {
 	 * Gira la figura 90� a la derecha
 	 */
 	public void girarDerecha(){
-<<<<<<< HEAD
+
 		//TODO
-=======
 		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
 		ListIterator<Trazo> Itr1= tr1.listIterator();
 		LinkedList<Trazo> tr2  = new LinkedList<Trazo>();
@@ -247,8 +246,7 @@ public class Figura {
 			tr2.add(pos, new Trazo('I'));
 			}
 		pos++;
-	}
->>>>>>> origin/Teses-y-metodos-Figura
+		}
 	}
 	/**
 	 * Aplica una homotecia de factor 2 a la figura
