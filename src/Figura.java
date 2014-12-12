@@ -185,13 +185,15 @@ public class Figura {
 		ListIterator<Trazo> Itr1= tr1.listIterator();
 		Trazo trazo1 = new Trazo(c);
 		int pos = 0;
+		int posFinal = 0;
 		while(Itr1.hasNext()){
 			if(Itr1.next().equals(trazo1)){
-				pos = pos;
+				posFinal = pos;
 			}
+			
 			pos++;
 		}
-		for(int i = pos+1 ; i<tr1.size() ; i++){
+		for(int i = posFinal+1 ; i<tr1.size() ; i++){
 			tr1.remove(i);
 			
 		}
@@ -205,16 +207,45 @@ public class Figura {
 	 * @param trazos
 	 */
 	public void sustituir(char c, String trazos){
-		//TODO
+		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
+		ListIterator<Trazo> Itr1= tr1.listIterator();
+		Figura f1 = new Figura(trazos);
+		boolean encontrado = false;
+		int pos = 0;
+		while(Itr1.hasNext() && !encontrado){
+			if(Itr1.next().equals(new Trazo(c))){
+				Itr1.remove();
+				insertar(pos, f1);
+				encontrado = true;
+			}
+			pos++;
+		}
 	}
 	
 	/**
 	 * Gira la figura 90¼ a la derecha
 	 */
 	public void girarDerecha(){
-		//TODO		
+		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
+		ListIterator<Trazo> Itr1= tr1.listIterator();
+		LinkedList<Trazo> tr2  = new LinkedList<Trazo>();
+		int pos = 0;
+		while(Itr1.hasNext()){
+			if(Itr1.next().equals(new Trazo('I'))){
+			tr2.add(pos, new Trazo('B'));
+			}
+			if(Itr1.next().equals(new Trazo('B'))){
+			tr2.add(pos, new Trazo('D'));
+			}
+			if(Itr1.next().equals(new Trazo('D'))){
+			tr2.add(pos, new Trazo('S'));
+			}
+			if(Itr1.next().equals(new Trazo('S'))){
+			tr2.add(pos, new Trazo('I'));
+			}
+		pos++;
 	}
-	
+	}
 	/**
 	 * Aplica una homotecia de factor 2 a la figura
 	 */
