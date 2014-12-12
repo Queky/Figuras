@@ -240,9 +240,7 @@ public class Figura {
 		for(Trazo t : iter){
 			numTrazos++;
 		}
-		
 		return numTrazos;
-		
 	}
 	
 	/**
@@ -303,20 +301,26 @@ public class Figura {
 	public boolean esHomotetica(Figura f){
 		// TODO 
 		// NOTA: No se puede utilizar la comparacion entre Strings.
+		boolean esH=false;
 		if(this.superficie()<f.superficie()){
-			this.homotecia2();
-			if(this.getTrazos()==f.getTrazos())
-				return true;
-			else
-				return false;
+			while(this.superficie()<f.superficie()){
+				this.homotecia2();
+				if(this.getTrazos()==f.getTrazos())
+					esH=true;
+				else
+					esH=false;
+			}
 		}
 		else{
+			while(f.superficie()<this.superficie()){
 			f.homotecia2();
 			if(this.getTrazos()==f.getTrazos())
-				return true;
+				esH=true;
 			else
-				return false;
+				esH=false;
+			}
 		}
+		return esH;
 	}
 	
 	/**
