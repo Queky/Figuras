@@ -25,7 +25,7 @@ public class TrazoTest {
 		assertNotNull(new Trazo('B'));
 		try{
 			Trazo t = new Trazo('X');
-			fail("No se debe permitir trazos que no sean D, B, I o S");
+			fail("No se debe permitir trazos que no sean D, B, I — S");
 		}
 		catch(IllegalArgumentException ex){
 			assertTrue(true);
