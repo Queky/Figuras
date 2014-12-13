@@ -25,7 +25,7 @@ public class Figura {
 			case 'I':
 				trazos.add(new Trazo('I'));
 				break;
-			case 'S':
+			default:
 				trazos.add(new Trazo('S'));
 				break;
 			}
@@ -55,7 +55,7 @@ public class Figura {
 			case 'I':
 				trazos.add(new Trazo('I'));
 				break;
-			case 'S':
+			default:
 				trazos.add(new Trazo('S'));
 				break;
 			}
@@ -82,7 +82,7 @@ public class Figura {
 	}
 	
 	/**
-	 * A–ade un trazo al final de los trazos de la figura
+	 * Aï¿½ade un trazo al final de los trazos de la figura
 	 * @param c, letra que indica un trazo
 	 */
 	public void anadirTrazo(char c){
@@ -98,15 +98,17 @@ public class Figura {
 		case 'I':
 			tr1.add(new Trazo('I'));
 			break;
-		case 'S':
+		default:
 			tr1.add(new Trazo('S'));
 			break;
+			
+			
 		}
 		
 	}
 	
 	/**
-	 * A–ade un trazo al inicio o al final de los trazos de la figura
+	 * Aï¿½ade un trazo al inicio o al final de los trazos de la figura
 	 * @param c, letra que indica un trazo
 	 * @param alInicio, si True indica al inicio y False, al final
 	 */
@@ -176,7 +178,7 @@ public class Figura {
 	}
 	}
 	/**
-	 * Elimina la secuencia de trazos desde la œltima ocurrencia del trazo de tipo 'c'
+	 * Elimina la secuencia de trazos desde la ï¿½ltima ocurrencia del trazo de tipo 'c'
 	 * @param c, un tipo de trazo
 	 */
 	public void eliminarDesdeUltimoTrazo(char c){
@@ -202,7 +204,7 @@ public class Figura {
 	/**
 	 * Sustituye el primer trazo de tipo 'c' con los trazos dados en 'trazos'
 	 * Pre: Loz trazos dados deben de formar una secuencia casi-cerrada-1, es decir, le falta un trazo para que sea cerrada y
-	 * deber’a de seguir correctamente la secuencia con el siguinte trazo a 'c'. Porque si no repercute en la anchura y altura.
+	 * deberï¿½a de seguir correctamente la secuencia con el siguinte trazo a 'c'. Porque si no repercute en la anchura y altura.
 	 * @param c, un tipo de trazo
 	 * @param trazos
 	 */
@@ -223,34 +225,45 @@ public class Figura {
 	}
 	
 	/**
-	 * Gira la figura 90¼ a la derecha
+	 * Gira la figura 90ï¿½ a la derecha
 	 */
 	public void girarDerecha(){
+
+		//TODO
 		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
-		ListIterator<Trazo> Itr1= tr1.listIterator();
-		LinkedList<Trazo> tr2  = new LinkedList<Trazo>();
-		int pos = 0;
-		while(Itr1.hasNext()){
-			if(Itr1.next().equals(new Trazo('I'))){
-			tr2.add(pos, new Trazo('B'));
-			}
-			if(Itr1.next().equals(new Trazo('B'))){
-			tr2.add(pos, new Trazo('D'));
-			}
-			if(Itr1.next().equals(new Trazo('D'))){
-			tr2.add(pos, new Trazo('S'));
-			}
-			if(Itr1.next().equals(new Trazo('S'))){
-			tr2.add(pos, new Trazo('I'));
-			}
-		pos++;
-	}
+		//while(Itr1.hasNext()){
+		for (int i = 0 ; i<tr1.size() ; i++) {
+			if(tr1.get(i).equals(new Trazo('I'))){
+				tr1.remove(i);
+				tr1.add(i,new Trazo('B'));
+			}else{
+				if(tr1.get(i).equals(new Trazo('B'))){
+					tr1.remove(i);
+					tr1.add(i, new Trazo('D'));
+				}else{
+					if(tr1.get(i).equals(new Trazo('D'))){
+				tr1.remove(i);
+				tr1.add( i,new Trazo('S'));
+					}else{
+						if(tr1.get(i).equals(new Trazo('S'))){
+							tr1.remove(i);
+							tr1.add(i, new Trazo('I'));
+						}
+					}}}
+		}
 	}
 	/**
 	 * Aplica una homotecia de factor 2 a la figura
 	 */
 	public void homotecia2(){
 		//TODO		
+		LinkedList<Trazo> iter = (LinkedList<Trazo>) getTrazos();
+		LinkedList<Trazo> newLista = new LinkedList<Trazo>();
+		for(Trazo t : iter){
+			newLista.add(t);
+			newLista.add(t);
+		}
+		trazos=newLista;
 	}
 	
 	/**
@@ -259,7 +272,12 @@ public class Figura {
 	 */
 	public int longitud(){
 		//TODO
-		return 0;
+		LinkedList<Trazo> iter = (LinkedList<Trazo>) getTrazos();
+		int numTrazos=0;
+		for(Trazo t : iter){
+			numTrazos++;
+		}
+		return numTrazos;
 	}
 	
 	/**
@@ -267,7 +285,13 @@ public class Figura {
 	 * @return altura de la figura
 	 */
 	public int altura(){
-		return 0;
+		LinkedList<Trazo> iter = (LinkedList<Trazo>) getTrazos();
+		int alt=0;
+		for(Trazo t : iter){
+			if(t.equals('S'))
+				alt++;
+		}
+		return alt;
 	}
 	
 	/**
@@ -276,7 +300,13 @@ public class Figura {
 	 */
 	public int anchura(){
 		//TODO
-		return 0;
+		LinkedList<Trazo> iter = (LinkedList<Trazo>) getTrazos();
+		int anch=0;
+		for(Trazo t : iter){
+			if(t.equals('D'))
+				anch++;
+		}
+		return anch;
 	}
 	
 	/**
@@ -284,7 +314,7 @@ public class Figura {
 	 * @return superficie de la figura
 	 */
 	public int superficie(){
-		return 0;
+		return altura()*anchura();
 	}
 
 	/**
@@ -300,7 +330,7 @@ public class Figura {
 	}
 
 	/**
-	 * Verifica si la figura actual y la figura 'f' son homoteticas. Es homotetica si las dos figuras tienen la misma orientaci—n 
+	 * Verifica si la figura actual y la figura 'f' son homoteticas. Es homotetica si las dos figuras tienen la misma orientaciï¿½n 
 	 * y aplicando una secuencia de homotecias del factor 2 a una de las figuras se obtiene la otra.
 	 * @param f, una figura
 	 * @return True si es homotetica y False, en caso contrario
@@ -308,7 +338,26 @@ public class Figura {
 	public boolean esHomotetica(Figura f){
 		// TODO 
 		// NOTA: No se puede utilizar la comparacion entre Strings.
-		return false;
+		boolean esH=false;
+		if(this.superficie()<f.superficie()){
+			while(this.superficie()<f.superficie()){
+				this.homotecia2();
+				if(this.getTrazos()==f.getTrazos())
+					esH=true;
+				else
+					esH=false;
+			}
+		}
+		else{
+			while(f.superficie()<this.superficie()){
+			f.homotecia2();
+			if(this.getTrazos()==f.getTrazos())
+				esH=true;
+			else
+				esH=false;
+			}
+		}
+		return esH;
 	}
 	
 	/**
@@ -320,6 +369,7 @@ public class Figura {
 	public boolean esSemejante(Figura f){
 		// TODO
 		// NOTA: No se puede utilizar la comparacion entre Strings.
+		// Hay que preguntarle; si no son semejantes, entra en un bucle sin fin porque siempre estamos aumentando el "tamano" de la figura...
 		return false;
 	}
 	
