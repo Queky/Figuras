@@ -102,7 +102,6 @@ public class Figura {
 			tr1.add(new Trazo('S'));
 			break;
 		}
-		
 	}
 	
 	/**
@@ -282,12 +281,28 @@ public class Figura {
 	 */
 	public int altura(){
 		LinkedList<Trazo> iter = (LinkedList<Trazo>) getTrazos();
+		int altMax=0;
 		int alt=0;
 		for(Trazo t : iter){
-			if(t.equals('S'))
-				alt++;
+			if(t.equals('S')){
+				alt=0;
+				if(alt>=0)
+					alt++;
+				else if(altMax==alt){
+					alt++;
+					altMax++;
+				}
+			}
+			else if(t.equals('B')){
+				if(alt<=0){
+					alt--;
+					altMax++;
+				}
+				else
+					alt--;		
+			}
 		}
-		return alt;
+		return altMax;
 	}
 	
 	/**
@@ -296,6 +311,7 @@ public class Figura {
 	 */
 	public int anchura(){
 		//TODO
+		//Hay que corregir, hacerlo igual que altura
 		LinkedList<Trazo> iter = (LinkedList<Trazo>) getTrazos();
 		int anch=0;
 		for(Trazo t : iter){
@@ -334,8 +350,11 @@ public class Figura {
 	public boolean esHomotetica(Figura f){
 		// TODO 
 		// NOTA: No se puede utilizar la comparacion entre Strings.
+		// Hay que cambiarlo y usar solo un while, dentro poner los if (menos codigo)
 		boolean esH=false;
+		boolean usado=false;
 		if(this.superficie()<f.superficie()){
+			usado=true;
 			while(this.superficie()<f.superficie()){
 				this.homotecia2();
 				if(this.getTrazos()==f.getTrazos())
@@ -344,7 +363,8 @@ public class Figura {
 					esH=false;
 			}
 		}
-		else{
+		else if(f.superficie()<this.superficie() && !usado){
+			usado=true;
 			while(f.superficie()<this.superficie()){
 			f.homotecia2();
 			if(this.getTrazos()==f.getTrazos())
@@ -352,6 +372,10 @@ public class Figura {
 			else
 				esH=false;
 			}
+		}
+		else{
+			if(this.getTrazos()==f.getTrazos() && !usado)
+				esH=true;
 		}
 		return esH;
 	}
@@ -366,6 +390,25 @@ public class Figura {
 		// TODO
 		// NOTA: No se puede utilizar la comparacion entre Strings.
 		// Hay que preguntarle; si no son semejantes, entra en un bucle sin fin porque siempre estamos aumentando el "tamano" de la figura...
+		int cont=0;
+		boolean esH=false;
+		boolean usado=false;
+		
+		while(this.superficie()<f.superficie()){
+			this.homotecia2();
+		}
+		while(f.superficie()<this.superficie() && !usado){
+			f.homotecia2();
+		}
+		if(this.superficie()==f.superficie()){
+			while(cont<4){
+				
+			}
+				
+		}
+		
+		
+		
 		return false;
 	}
 	
@@ -386,7 +429,4 @@ public class Figura {
 		// TODO Auto-generated method stub
 		return super.toString();
 	}
-	
-	
-	
 }
