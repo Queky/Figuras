@@ -25,7 +25,7 @@ public class Figura {
 			case 'I':
 				trazos.add(new Trazo('I'));
 				break;
-			default:
+			case 'S':
 				trazos.add(new Trazo('S'));
 				break;
 			}
@@ -55,7 +55,7 @@ public class Figura {
 			case 'I':
 				trazos.add(new Trazo('I'));
 				break;
-			default:
+			case 'S':
 				trazos.add(new Trazo('S'));
 				break;
 			}
@@ -98,11 +98,9 @@ public class Figura {
 		case 'I':
 			tr1.add(new Trazo('I'));
 			break;
-		default:
+		case 'S':
 			tr1.add(new Trazo('S'));
 			break;
-			
-			
 		}
 	}
 	
@@ -230,7 +228,6 @@ public class Figura {
 
 		//TODO
 		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
-<<<<<<< HEAD
 		ListIterator<Trazo> Itr1= tr1.listIterator();
 		LinkedList<Trazo> tr2  = new LinkedList<Trazo>();
 		int pos = 0;
@@ -248,27 +245,6 @@ public class Figura {
 			tr2.add(pos, new Trazo('I'));
 			}
 		pos++;
-=======
-		//while(Itr1.hasNext()){
-		for (int i = 0 ; i<tr1.size() ; i++) {
-			if(tr1.get(i).equals(new Trazo('I'))){
-				tr1.remove(i);
-				tr1.add(i,new Trazo('B'));
-			}else{
-				if(tr1.get(i).equals(new Trazo('B'))){
-					tr1.remove(i);
-					tr1.add(i, new Trazo('D'));
-				}else{
-					if(tr1.get(i).equals(new Trazo('D'))){
-				tr1.remove(i);
-				tr1.add( i,new Trazo('S'));
-					}else{
-						if(tr1.get(i).equals(new Trazo('S'))){
-							tr1.remove(i);
-							tr1.add(i, new Trazo('I'));
-						}
-					}}}
->>>>>>> nuevos-tests-y-alguna-cooreccion-en-metodos
 		}
 	}
 	/**
@@ -305,7 +281,6 @@ public class Figura {
 	 */
 	public int altura(){
 		LinkedList<Trazo> iter = (LinkedList<Trazo>) getTrazos();
-<<<<<<< HEAD
 		int altMax=0;
 		int alt=0;
 		for(Trazo t : iter){
@@ -328,14 +303,6 @@ public class Figura {
 			}
 		}
 		return altMax;
-=======
-		int alt=0;
-		for(Trazo t : iter){
-			if(t.equals('S'))
-				alt++;
-		}
-		return alt;
->>>>>>> nuevos-tests-y-alguna-cooreccion-en-metodos
 	}
 	
 	/**
@@ -344,10 +311,7 @@ public class Figura {
 	 */
 	public int anchura(){
 		//TODO
-<<<<<<< HEAD
 		//Hay que corregir, hacerlo igual que altura
-=======
->>>>>>> nuevos-tests-y-alguna-cooreccion-en-metodos
 		LinkedList<Trazo> iter = (LinkedList<Trazo>) getTrazos();
 		int anch=0;
 		for(Trazo t : iter){
@@ -386,16 +350,11 @@ public class Figura {
 	public boolean esHomotetica(Figura f){
 		// TODO 
 		// NOTA: No se puede utilizar la comparacion entre Strings.
-<<<<<<< HEAD
 		// Hay que cambiarlo y usar solo un while, dentro poner los if (menos codigo)
 		boolean esH=false;
 		boolean usado=false;
 		if(this.superficie()<f.superficie()){
 			usado=true;
-=======
-		boolean esH=false;
-		if(this.superficie()<f.superficie()){
->>>>>>> nuevos-tests-y-alguna-cooreccion-en-metodos
 			while(this.superficie()<f.superficie()){
 				this.homotecia2();
 				if(this.getTrazos()==f.getTrazos())
@@ -404,12 +363,8 @@ public class Figura {
 					esH=false;
 			}
 		}
-<<<<<<< HEAD
 		else if(f.superficie()<this.superficie() && !usado){
 			usado=true;
-=======
-		else{
->>>>>>> nuevos-tests-y-alguna-cooreccion-en-metodos
 			while(f.superficie()<this.superficie()){
 			f.homotecia2();
 			if(this.getTrazos()==f.getTrazos())
@@ -418,13 +373,10 @@ public class Figura {
 				esH=false;
 			}
 		}
-<<<<<<< HEAD
 		else{
 			if(this.getTrazos()==f.getTrazos() && !usado)
 				esH=true;
 		}
-=======
->>>>>>> nuevos-tests-y-alguna-cooreccion-en-metodos
 		return esH;
 	}
 	
@@ -438,7 +390,6 @@ public class Figura {
 		// TODO
 		// NOTA: No se puede utilizar la comparacion entre Strings.
 		// Hay que preguntarle; si no son semejantes, entra en un bucle sin fin porque siempre estamos aumentando el "tamano" de la figura...
-<<<<<<< HEAD
 		int cont=0;
 		boolean esH=false;
 		boolean usado=false;
@@ -452,14 +403,8 @@ public class Figura {
 		if(this.superficie()==f.superficie()){
 			while(cont<4){
 				
-			}
-				
+			}		
 		}
-		
-		
-		
-=======
->>>>>>> nuevos-tests-y-alguna-cooreccion-en-metodos
 		return false;
 	}
 	
