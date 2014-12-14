@@ -285,15 +285,16 @@ public class Figura {
 		int alt=0;
 		for(Trazo t : iter){
 			if(t.equals('S')){
-				alt=0;
-				if(alt>=0)
+				if(alt<0)
+					alt=0;
+				if(alt>=0 && altMax!=alt)
 					alt++;
-				else if(altMax==alt){
+				if(altMax==alt){
 					alt++;
 					altMax++;
 				}
 			}
-			else if(t.equals('B')){
+			if(t.equals('B')){
 				if(alt<=0){
 					alt--;
 					altMax++;
@@ -313,12 +314,29 @@ public class Figura {
 		//TODO
 		//Hay que corregir, hacerlo igual que altura
 		LinkedList<Trazo> iter = (LinkedList<Trazo>) getTrazos();
+		int anchMax=0;
 		int anch=0;
 		for(Trazo t : iter){
-			if(t.equals('D'))
-				anch++;
+			if(t.equals('D')){
+				if(anch<0)
+					anch=0;
+				if(anch>=0 && anchMax!=anch)
+					anch++;
+				if(anchMax==anch){
+					anch++;
+					anchMax++;
+				}
+			}
+			if(t.equals('I')){
+				if(anch<=0){
+					anch--;
+					anchMax++;
+				}
+				else
+					anch--;		
+			}
 		}
-		return anch;
+		return anchMax;
 	}
 	
 	/**
@@ -350,7 +368,8 @@ public class Figura {
 	public boolean esHomotetica(Figura f){
 		// TODO 
 		// NOTA: No se puede utilizar la comparacion entre Strings.
-		// Hay que cambiarlo y usar solo un while, dentro poner los if (menos codigo)
+		// Mejorar un poco el codigo??
+		
 		boolean esH=false;
 		boolean usado=false;
 		if(this.superficie()<f.superficie()){
@@ -389,23 +408,27 @@ public class Figura {
 	public boolean esSemejante(Figura f){
 		// TODO
 		// NOTA: No se puede utilizar la comparacion entre Strings.
-		// Hay que preguntarle; si no son semejantes, entra en un bucle sin fin porque siempre estamos aumentando el "tamano" de la figura...
+		// TERMINAR
 		int cont=0;
 		boolean esH=false;
 		boolean usado=false;
 		
 		while(this.superficie()<f.superficie()){
 			this.homotecia2();
+			usado=true;
 		}
 		while(f.superficie()<this.superficie() && !usado){
 			f.homotecia2();
 		}
 		if(this.superficie()==f.superficie()){
 			while(cont<4){
-				
+				if(this.getTrazos()==f.getTrazos())
+					esH=true;
+				this.girarDerecha();
+				cont++;
 			}		
 		}
-		return false;
+		return esH;
 	}
 	
 	/**
