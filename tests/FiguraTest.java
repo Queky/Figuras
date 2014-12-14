@@ -11,10 +11,10 @@ public class FiguraTest {
 	Figura a, b, c, d;
 	@Before
 	public void setUp() throws Exception {
-		a = new Figura("DDBB", "figura1");
-		b = new Figura("IIDD", "figura2");
-		c = new Figura("DBIS", "figura3");
-		d = new Figura("DDII", "figura1");
+		a = new Figura("DBIS", "figura1");
+		b = new Figura("DDBBIISS", "figura2");
+		c = new Figura("DBDBDBDS", "figura3");
+		d = new Figura("DBI", "figura4");
 	}
 
 	@After
@@ -23,7 +23,7 @@ public class FiguraTest {
 
 	@Test
 	public void testFigura() {
-		assertNotNull(new Figura("DDBB", "figura1"));
+		assertNotNull(new Figura("DBIS", "figura1"));
 	
 	
 	}
@@ -36,49 +36,75 @@ public class FiguraTest {
 	public void testGetTrazos(){
 		LinkedList<Trazo> tr1 = new LinkedList<Trazo>();
 		tr1.add(new Trazo('D'));
-		tr1.add(new Trazo('D'));
 		tr1.add(new Trazo('B'));
-		tr1.add(new Trazo('B'));
+		tr1.add(new Trazo('I'));
+		tr1.add(new Trazo('S'));
 		assertEquals(tr1, a.getTrazos());	
 	}
 	@Test
-	public void testAnadirTrazo(){	
-		Figura t = new Figura("DDB");
+	public void testAnadirTrazo(){
+		Figura t = new Figura("");
+		t.anadirTrazo('D');
 		t.anadirTrazo('B');
+		t.anadirTrazo('I');
+		t.anadirTrazo('S');
 		assertEquals(t.getTrazos(), a.getTrazos());
 	}
 	@Test
 	public void testFusionar(){
-		Figura t = new Figura("DD");
-		t.fusionar(new Figura("BB"));
+		Figura t = new Figura("DB");
+		t.fusionar(new Figura("IS"));
 		assertEquals(t.getTrazos(), a.getTrazos());	
 	}
 	@Test
-	public void insertar(){
-		Figura t = new Figura("DBB");
-		t.insertar(0, new Figura("D"));
+	public void testInsertar(){
+		Figura t = new Figura("DIS");
+		t.insertar(1, new Figura("B"));
 		assertEquals(t.getTrazos(), a.getTrazos());
 	}
 	@Test
-	public void eliminarDesdeUltimoTrazo(){
-		Figura t = new Figura("DDBBS");
-		t.eliminarDesdeUltimoTrazo('B');
+	public void testEliminarDesdeUltimoTrazo(){
+		Figura t = new Figura("DBISD");
+		t.eliminarDesdeUltimoTrazo('S');
 		assertEquals(t.getTrazos(),a.getTrazos() );
 	}
 	@Test
-	public void sustituir(){
-		Figura t = new Figura("DDS");
-		t.sustituir('S', "BB");
+	public void testSustituir(){
+		Figura t = new Figura("DBS");
+		t.sustituir('S', "IS");
 		assertEquals(t.getTrazos(), a.getTrazos());
 	}
 	@Test
-	public void girarDerecha(){
-		Figura t = new Figura("BBSS");
+	public void testGirarDerecha(){
+		Figura t = new Figura("BISD");
 		t.girarDerecha();
 		assertEquals(t.getTrazos(),a.getTrazos() );
 	}
-	
-	
+	@Test
+	public void testHomotecia2(){
+		Figura t = new Figura("");
+		t.anadirTrazo('D');
+		t.anadirTrazo('B');
+		t.anadirTrazo('I');
+		t.anadirTrazo('S');
+		t.homotecia2();
+		assertEquals(t.getTrazos(),b.getTrazos());
+	}
+	@Test
+	public void testLongitud(){
+		assertTrue(a.longitud() == 4);
+		assertTrue(b.longitud() == 8);
+		assertFalse(a.longitud() != 4);
+		
+	}
+	@Test
+	public void altura(){
+		assertTrue(a.altura() == 1);
+		assertTrue(b.altura() == 2);
+		assertTrue(c.altura() == 2);
+		assertFalse(a.altura() != 1);
+		
+	}
 	
 	
 }
