@@ -225,7 +225,6 @@ public class Figura {
 	 * Gira la figura 90� a la derecha
 	 */
 	public void girarDerecha(){
-
 		//TODO
 		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
 		ListIterator<Trazo> Itr1= tr1.listIterator();
@@ -252,9 +251,9 @@ public class Figura {
 	 */
 	public void homotecia2(){
 		//TODO		
-		LinkedList<Trazo> iter = (LinkedList<Trazo>) getTrazos();
+		LinkedList<Trazo> traz = (LinkedList<Trazo>) getTrazos();
 		LinkedList<Trazo> newLista = new LinkedList<Trazo>();
-		for(Trazo t : iter){
+		for(Trazo t : traz){
 			newLista.add(t);
 			newLista.add(t);
 		}
@@ -267,9 +266,9 @@ public class Figura {
 	 */
 	public int longitud(){
 		//TODO
-		LinkedList<Trazo> iter = (LinkedList<Trazo>) getTrazos();
+		LinkedList<Trazo> traz = (LinkedList<Trazo>) getTrazos();
 		int numTrazos=0;
-		for(Trazo t : iter){
+		for(Trazo t : traz){
 			numTrazos++;
 		}
 		return numTrazos;
@@ -280,10 +279,10 @@ public class Figura {
 	 * @return altura de la figura
 	 */
 	public int altura(){
-		LinkedList<Trazo> iter = (LinkedList<Trazo>) getTrazos();
+		LinkedList<Trazo> traz = (LinkedList<Trazo>) getTrazos();
 		int altMax=0;
 		int alt=0;
-		for(Trazo t : iter){
+		for(Trazo t : traz){
 			if(t.equals('S')){
 				if(alt<0)
 					alt=0;
@@ -313,10 +312,10 @@ public class Figura {
 	public int anchura(){
 		//TODO
 		//Hay que corregir, hacerlo igual que altura
-		LinkedList<Trazo> iter = (LinkedList<Trazo>) getTrazos();
+		LinkedList<Trazo> traz = (LinkedList<Trazo>) getTrazos();
 		int anchMax=0;
 		int anch=0;
-		for(Trazo t : iter){
+		for(Trazo t : traz){
 			if(t.equals('D')){
 				if(anch<0)
 					anch=0;
@@ -369,7 +368,7 @@ public class Figura {
 		// TODO 
 		// NOTA: No se puede utilizar la comparacion entre Strings.
 		// Mejorar un poco el codigo??
-		
+				
 		boolean esH=false;
 		boolean usado=false;
 		if(this.superficie()<f.superficie()){
