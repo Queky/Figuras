@@ -279,6 +279,7 @@ public class Figura {
 	 * @return altura de la figura
 	 */
 	public int altura(){
+		// Cambiar y poner 3 variables
 		LinkedList<Trazo> traz = (LinkedList<Trazo>) getTrazos();
 		int altMax=0;
 		int alt=0;
@@ -309,7 +310,7 @@ public class Figura {
 	 */
 	public int anchura(){
 		//TODO
-		//Hay que corregir, hacerlo igual que altura
+		// Corregir 
 		LinkedList<Trazo> traz = (LinkedList<Trazo>) getTrazos();
 		int anchMax=0;
 		int anch=0;
