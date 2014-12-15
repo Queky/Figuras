@@ -1,16 +1,21 @@
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 
 public class GestorFiguras {
 	//TODO Representacion de una coleccion de figuras
-	
+	private Hashtable<String, Figura> gFigura; 
 	
 	/**
 	 * Crea un gestor de figuras vacia
 	 */
 	public GestorFiguras(){
 		// TODO
-		
+		gFigura=new Hashtable<String, Figura>();
 	}
 	
 	/**
@@ -19,7 +24,8 @@ public class GestorFiguras {
 	 */
 	public void guardar(Figura figura){
 		// TODO		
-	}
+		gFigura.put(figura.getNombre(), figura);
+ 	}
 	
 	/**
 	 * Devuelve la figura que tiene el nombre 'nombre' y si no null
@@ -28,7 +34,7 @@ public class GestorFiguras {
 	 */
 	public Figura recuperar(String nombre){
 		// TODO
-		return null;
+		return gFigura.get(nombre);
 	}
 	
 	/**
@@ -37,6 +43,8 @@ public class GestorFiguras {
 	 */
 	public void cambiar(Figura figura){
 		//TODO		
+		gFigura.remove(figura.getNombre());
+		gFigura.put(figura.getNombre(), figura);
 	}
 	
 	/**
@@ -46,7 +54,10 @@ public class GestorFiguras {
 	 */
 	public boolean existe(String nombre){
 		//TODO
-		return false;
+		if(gFigura.containsKey(nombre))
+			return true;
+		else
+			return false;
 	}
 	
 	/**
@@ -56,7 +67,14 @@ public class GestorFiguras {
 	 */
 	public List<Figura> recuperarLista(String [] nombres){
 		//TODO
-		return null;
+		// Que devuelva solo una lista con figuras, sinmas??
+		ArrayList<Figura> listaFiguras = new ArrayList<Figura>();
+		for(String n : nombres){
+			if(gFigura.containsKey(n)){
+				listaFiguras.add(gFigura.get(n));
+			}
+		}
+		return listaFiguras;
 	}
 
 	/**
@@ -66,7 +84,16 @@ public class GestorFiguras {
 	 */
 	public List<Figura> recuperarIguales(Figura figura){
 		//TODO
-		return null;
+		// Solo se puede acceder a los trazos con un nombre, si no tengo nombre como accedo al dato...?
+		ArrayList<Figura> listaFiguras = new ArrayList<Figura>();
+		int pos=0, cont=0;
+		while(cont<=gFigura.size()){
+			if(existe(figura.getNombre()) && gFigura.get(figura.getNombre()).equals(figura.getTrazos())){
+				listaFiguras.add(gFigura.get(figura.getNombre()));
+				pos++;
+			}
+		}
+		return listaFiguras;
 	}
 
 	/**
