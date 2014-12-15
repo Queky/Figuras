@@ -25,12 +25,12 @@ public class Figura {
 			case 'I':
 				trazos.add(new Trazo('I'));
 				break;
-			case 'S':
+			default:
 				trazos.add(new Trazo('S'));
 				break;
 			}
 			
-		}
+			}
 			
 		}
 	
@@ -55,7 +55,7 @@ public class Figura {
 			case 'I':
 				trazos.add(new Trazo('I'));
 				break;
-			case 'S':
+			default:
 				trazos.add(new Trazo('S'));
 				break;
 			}
@@ -98,7 +98,7 @@ public class Figura {
 		case 'I':
 			tr1.add(new Trazo('I'));
 			break;
-		case 'S':
+		default:
 			tr1.add(new Trazo('S'));
 			break;
 		}
@@ -123,7 +123,7 @@ public class Figura {
 		case 'I':
 			tr1.add(new Trazo('I'));
 			break;
-		case 'S':
+		default:
 			tr1.add(new Trazo('S'));
 			break;
 		}
@@ -139,7 +139,7 @@ public class Figura {
 		case 'I':
 			tr1.addFirst(new Trazo('I'));
 			break;
-		case 'S':
+		default:
 			tr1.addFirst(new Trazo('S'));
 			break;
 		}	
@@ -284,22 +284,20 @@ public class Figura {
 		int alt=0;
 		for(Trazo t : traz){
 			if(t.equals('S')){
-				if(alt<0)
-					alt=0;
-				if(alt>=0 && altMax!=alt)
-					alt++;
 				if(altMax==alt){
-					alt++;
 					altMax++;
+					alt++;
 				}
-			}
+				if(alt<altMax)
+					alt++;
+				}
 			if(t.equals('B')){
-				if(alt<=0){
+				if(altMax==Math.abs(alt)){
 					alt--;
 					altMax++;
 				}
-				else
-					alt--;		
+				if(Math.abs(alt)<altMax)
+					alt--;
 			}
 		}
 		return altMax;
@@ -316,23 +314,21 @@ public class Figura {
 		int anchMax=0;
 		int anch=0;
 		for(Trazo t : traz){
-			if(t.equals('D')){
-				if(anch<0)
-					anch=0;
-				if(anch>=0 && anchMax!=anch)
-					anch++;
+			if(t.equals('S')){
 				if(anchMax==anch){
-					anch++;
 					anchMax++;
+					anch++;
 				}
-			}
-			if(t.equals('I')){
-				if(anch<=0){
+				if(anch<anchMax)
+					anch++;
+				}
+			if(t.equals('B')){
+				if(anchMax==Math.abs(anch)){
 					anch--;
 					anchMax++;
 				}
-				else
-					anch--;		
+				if(Math.abs(anch)<anchMax)
+					anch--;
 			}
 		}
 		return anchMax;
