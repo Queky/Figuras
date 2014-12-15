@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
@@ -67,11 +68,15 @@ public class GestorFiguras {
 	 */
 	public List<Figura> recuperarLista(String [] nombres){
 		//TODO
-		// Que devuelva solo una lista con figuras, sinmas??
+		// Hay que mirar si admite mas de un mismo nombre en diferentes figuras...
 		ArrayList<Figura> listaFiguras = new ArrayList<Figura>();
+		Enumeration<String> e = gFigura.keys();
+		String k;
 		for(String n : nombres){
-			if(gFigura.containsKey(n)){
-				listaFiguras.add(gFigura.get(n));
+			while(e.hasMoreElements()){
+				k=e.nextElement();
+				if(k.equals(n))
+					listaFiguras.add(gFigura.get(n));
 			}
 		}
 		return listaFiguras;
@@ -84,13 +89,13 @@ public class GestorFiguras {
 	 */
 	public List<Figura> recuperarIguales(Figura figura){
 		//TODO
-		// Solo se puede acceder a los trazos con un nombre, si no tengo nombre como accedo al dato...?
 		ArrayList<Figura> listaFiguras = new ArrayList<Figura>();
-		int pos=0, cont=0;
-		while(cont<=gFigura.size()){
-			if(existe(figura.getNombre()) && gFigura.get(figura.getNombre()).equals(figura.getTrazos())){
-				listaFiguras.add(gFigura.get(figura.getNombre()));
-				pos++;
+		Enumeration<Figura> e = gFigura.elements();
+		Figura f;
+		while(e.hasMoreElements()){
+			f=e.nextElement();
+			if(f.equals(figura)){
+				listaFiguras.add(f);
 			}
 		}
 		return listaFiguras;
@@ -103,7 +108,14 @@ public class GestorFiguras {
 	 */
 	public List<Figura> recuperarSemejantes(Figura figura){
 		//TODO
-		return null;
+		ArrayList<Figura> listaFiguras = new ArrayList<Figura>();
+		Enumeration<Figura> e = gFigura.elements();
+		Figura f;
+		while(e.hasMoreElements()){
+			f=e.nextElement();
+			if(f.esSemejante(figura))
+				listaFiguras.add(f);
+		}
+		return listaFiguras;
 	}
-
 }
