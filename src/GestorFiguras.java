@@ -10,6 +10,8 @@ public class GestorFiguras {
 	
 	/**
 	 * Crea un gestor de figuras vacia
+	 * @param fiigura 
+	 * @param nombre 
 	 */
 	public GestorFiguras(){
 		// TODO
@@ -18,6 +20,7 @@ public class GestorFiguras {
 	
 	/**
 	 * Anade una nueva figura
+	 * @param string 
 	 * @param figura
 	 */
 	public void guardar(Figura figura){
