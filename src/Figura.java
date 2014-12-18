@@ -326,7 +326,7 @@ public class Figura {
 		int anchMax=0;
 		int anch=0;
 		for(Trazo t : traz){
-			if(t.equals(new Trazo('S'))){
+			if(t.equals(new Trazo('D'))){
 				if(anchMax==anch){
 					anchMax++;
 					anch++;
@@ -334,7 +334,7 @@ public class Figura {
 				if(anch<anchMax)
 					anch++;
 				}
-			if(t.equals(new Trazo('B'))){
+			if(t.equals(new Trazo('I'))){
 				if(anchMax==Math.abs(anch)){
 					anch--;
 					anchMax++;

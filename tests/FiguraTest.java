@@ -124,5 +124,10 @@ public class FiguraTest {
 		assertTrue(t.esSemejante(b));
 		
 	}
-	
+	@Test
+	public void testSuperficie(){
+		assertTrue(a.superficie() == 1);
+		//assert
+		
+	}
 }
