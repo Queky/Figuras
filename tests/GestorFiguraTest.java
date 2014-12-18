@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -11,7 +12,7 @@ import org.junit.Test;
 public class GestorFiguraTest {
 	
 	GestorFiguras gF;
-	Figura a, b, c, d;
+	Figura a, b, c, d, e;
 	@Before
 	public void setUp() throws Exception{
 		gF = new GestorFiguras();
@@ -19,6 +20,8 @@ public class GestorFiguraTest {
 		b = new Figura("DDBBIISS", "nombre2");
 		c = new Figura("DBDBDBDS", "nombre3");
 		d = new Figura("DBI", "nombre4");
+		e = new Figura("DBI", "nombre5");
+
 	}
 	
 	@After
@@ -87,7 +90,10 @@ public class GestorFiguraTest {
 		gF.guardar(a);
 		gF.guardar(b);
 		gF.guardar(c);
+		gF.guardar(d);
 		// Hay que comparar dos arrays/listas...
+		assertEquals(gF.recuperarLista(nombres).get(0).getNombre(), nombresContenidos.get(0).getNombre());
+		assertEquals(gF.recuperarLista(nombres).get(1).getNombre(), nombresContenidos.get(1).getNombre());
 	}
 	
 	@Test
@@ -96,12 +102,13 @@ public class GestorFiguraTest {
 		gF.guardar(b);
 		gF.guardar(c);
 		gF.guardar(d);
-		Figura f = new Figura("DBI", "nombres5");
-		gF.guardar(f);
-		ArrayList<Figura> nombresContenidos = new ArrayList<Figura>();
-		nombresContenidos.add(a);
+		gF.guardar(e);
+		Figura f = new Figura("DBI", "nombre6");
+		List<Figura> nombresContenidos = new ArrayList<Figura>();
+		nombresContenidos.add(d);
 		nombresContenidos.add(f);
-		// Hay que comparar dos arrays/listas...
+		assertEquals(nombresContenidos.get(0).getTrazos(), gF.recuperarIguales(f).get(0).getTrazos());
+		assertEquals(nombresContenidos.get(1).getTrazos(), gF.recuperarIguales(f).get(1).getTrazos());
 	}
 	
 	@Test

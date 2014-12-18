@@ -68,10 +68,11 @@ public class GestorFiguras {
 	 */
 	public List<Figura> recuperarLista(String [] nombres){
 		//TODO
-		ArrayList<Figura> listaFiguras = new ArrayList<Figura>();
-		Enumeration<String> e = gFigura.keys();
+		List<Figura> listaFiguras = new ArrayList<Figura>();
+		Enumeration<String> e;
 		String k;
 		for(String n : nombres){
+			e = gFigura.keys();
 			while(e.hasMoreElements()){
 				k=e.nextElement();
 				if(k.equals(n))
@@ -88,7 +89,7 @@ public class GestorFiguras {
 	 */
 	public List<Figura> recuperarIguales(Figura figura){
 		//TODO
-		ArrayList<Figura> listaFiguras = new ArrayList<Figura>();
+		List<Figura> listaFiguras = new ArrayList<Figura>();
 		Enumeration<Figura> e = gFigura.elements();
 		Figura f;
 		while(e.hasMoreElements()){

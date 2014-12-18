@@ -98,7 +98,7 @@ public class FiguraTest {
 		
 	}
 	@Test
-	public void altura(){
+	public void testAltura(){
 		assertTrue(a.altura() == 1);
 		assertTrue(b.altura() == 2);
 		assertTrue(c.altura() == 2);
