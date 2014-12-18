@@ -290,12 +290,11 @@ public class Figura {
 	 * @return altura de la figura
 	 */
 	public int altura(){
-		// Cambiar y poner 3 variables
 		LinkedList<Trazo> traz = (LinkedList<Trazo>) getTrazos();
 		int altMax=0;
 		int alt=0;
 		for(Trazo t : traz){
-			if(t.equals('S')){
+			if(t.equals(new Trazo('S'))){
 				if(altMax==alt){
 					altMax++;
 					alt++;
@@ -303,7 +302,7 @@ public class Figura {
 				if(alt<altMax)
 					alt++;
 				}
-			if(t.equals('B')){
+			if(t.equals(new Trazo('B'))){
 				if(altMax==Math.abs(alt)){
 					alt--;
 					altMax++;
@@ -321,12 +320,11 @@ public class Figura {
 	 */
 	public int anchura(){
 		//TODO
-		// Corregir 
 		LinkedList<Trazo> traz = (LinkedList<Trazo>) getTrazos();
 		int anchMax=0;
 		int anch=0;
 		for(Trazo t : traz){
-			if(t.equals('S')){
+			if(t.equals(new Trazo('D'))){
 				if(anchMax==anch){
 					anchMax++;
 					anch++;
@@ -334,7 +332,7 @@ public class Figura {
 				if(anch<anchMax)
 					anch++;
 				}
-			if(t.equals('B')){
+			if(t.equals(new Trazo('I'))){
 				if(anchMax==Math.abs(anch)){
 					anch--;
 					anchMax++;

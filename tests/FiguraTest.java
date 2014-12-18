@@ -101,7 +101,7 @@ public class FiguraTest {
 	public void testAltura(){
 		assertTrue(a.altura() == 1);
 		assertTrue(b.altura() == 2);
-		assertTrue(c.altura() == 2);
+		assertTrue(c.altura() == 3);
 		assertFalse(a.altura() != 1);
 		
 	}
