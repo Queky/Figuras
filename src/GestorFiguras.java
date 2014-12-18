@@ -10,6 +10,8 @@ public class GestorFiguras {
 	
 	/**
 	 * Crea un gestor de figuras vacia
+	 * @param fiigura 
+	 * @param nombre 
 	 */
 	public GestorFiguras(){
 		// TODO
@@ -18,6 +20,7 @@ public class GestorFiguras {
 	
 	/**
 	 * Anade una nueva figura
+	 * @param string 
 	 * @param figura
 	 */
 	public void guardar(Figura figura){
@@ -65,7 +68,6 @@ public class GestorFiguras {
 	 */
 	public List<Figura> recuperarLista(String [] nombres){
 		//TODO
-		// Hay que mirar si admite mas de un mismo nombre en diferentes figuras...
 		ArrayList<Figura> listaFiguras = new ArrayList<Figura>();
 		Enumeration<String> e = gFigura.keys();
 		String k;
@@ -91,7 +93,7 @@ public class GestorFiguras {
 		Figura f;
 		while(e.hasMoreElements()){
 			f=e.nextElement();
-			if(f.equals(figura)){
+			if(f.getTrazos().equals(figura.getTrazos())){
 				listaFiguras.add(f);
 			}
 		}
