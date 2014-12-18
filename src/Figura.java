@@ -112,7 +112,7 @@ public class Figura {
 	public void anadirTrazo(char c, boolean alInicio){
 		//TODO
 		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
-		if(alInicio = false){
+		if(alInicio == false){
 		switch (c) {
 		case 'D':
 			tr1.add(new Trazo('D'));
@@ -212,12 +212,13 @@ public class Figura {
 		boolean encontrado = false;
 		int pos = 0;
 		while(Itr1.hasNext() && !encontrado){
-			if(Itr1.next().equals(new Trazo(c))){
-				Itr1.remove();
-				insertar(pos, f1);
-				encontrado = true;
-			}
-			pos++;
+				if(Itr1.next().equals(new Trazo(c))){
+					Itr1.remove();
+					insertar(pos, f1);
+					encontrado = true;
+				}else
+					encontrado = false;
+				pos++;
 		}
 	}
 	
@@ -229,33 +230,19 @@ public class Figura {
 		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
 		int tamanoInicial = tr1.size();
 		for (int i = 0 ; i < tamanoInicial ; i++ ){
-			if(tr1.get(i).equals(new Trazo('I'))){
+			if(tr1.get(i).equals(new Trazo('I')))
 				tr1.add( new Trazo('B'));
-				}else{
-				if(tr1.get(i).equals(new Trazo('B'))){
+			else if(tr1.get(i).equals(new Trazo('B')))
 				tr1.add( new Trazo('D'));
-				}else{
-				if(tr1.get(i).equals(new Trazo('D'))){
+			else if(tr1.get(i).equals(new Trazo('D')))
 				tr1.add(new Trazo('S'));
-				}else{
-				if(tr1.get(i).equals(new Trazo('S'))){
+			else
 				tr1.add( new Trazo('I'));
-				}
-				}
-				}
-				}
-			}
+		}
 		for (int i = 0 ; i < tamanoInicial ; i++ ){
 			tr1.remove(0);
 		}
-		
 	}
-	
-		
-		
-		
-			
-		
 	
 	/**
 	 * Aplica una homotecia de factor 2 a la figura
@@ -292,33 +279,38 @@ public class Figura {
 	public int altura(){
 		LinkedList<Trazo> traz = (LinkedList<Trazo>) getTrazos();
 		int altMax=0;
+		int altMin=0;
 		int alt=0;
-		boolean usado=false;
+		boolean primeraVez = false;
 		for(Trazo t : traz){
 			if(t.equals(new Trazo('S'))){
-				if(altMax==alt){
+				if(alt==0 && alt==altMax && !primeraVez){
+					altMax++;
+					alt++;
+					primeraVez=true;
+				}
+				else if(alt==altMax && alt>=0 && primeraVez){
 					altMax++;
 					alt++;
 				}
-				if(alt<altMax)
+				else
 					alt++;
-				}
-			if(t.equals(new Trazo('B'))){
-				usado=false;
-				if(altMax==alt && alt!=0){
+			}
+			else if(t.equals(new Trazo('B'))){
+				if(alt==0 && Math.abs(alt)==altMin && !primeraVez){
+					altMin++;
 					alt--;
-					usado=true;
+					primeraVez=true;
 				}
-				if(altMax==Math.abs(alt) && !usado){
+				else if(Math.abs(alt)==altMin || alt<=0 && primeraVez){
 					alt--;
-					altMax++;
-					usado=true;
+					altMin++;
 				}
-				if(Math.abs(alt)<altMax && !usado)
+				else
 					alt--;
 			}
 		}
-		return altMax;
+		return altMax+altMin;
 	}
 	
 	/**
@@ -329,33 +321,38 @@ public class Figura {
 		//TODO
 		LinkedList<Trazo> traz = (LinkedList<Trazo>) getTrazos();
 		int anchMax=0;
+		int anchMin=0;
 		int anch=0;
-		boolean usado = false;
+		boolean primeraVez = false;
 		for(Trazo t : traz){
 			if(t.equals(new Trazo('D'))){
-				if(anchMax==anch){
+				if(anch==0 && anch==anchMax && !primeraVez){
+					anchMax++;
+					anch++;
+					primeraVez=true;
+				}
+				else if(anch==anchMax && anch>=0 && primeraVez){
 					anchMax++;
 					anch++;
 				}
-				if(anch<anchMax)
+				else
 					anch++;
-				}
-			if(t.equals(new Trazo('I'))){
-				usado=false;
-				if(anchMax==anch && anch!=0){
-					anch--;
-					usado = true;
-				}
-				else if(anchMax==Math.abs(anch) && !usado){
-					anch--;
-					anchMax++;
-					usado=true;
-					}
-				else if(Math.abs(anch)<anchMax && !usado)
-					anch--;
-					}
 			}
-		return anchMax;
+			else if(t.equals(new Trazo('I'))){
+				if(anch==0 && Math.abs(anch)==anchMin && !primeraVez){
+					anchMin++;
+					anch--;
+					primeraVez=true;
+				}
+				else if(Math.abs(anch)==anchMin || anch<=0 && primeraVez){
+					anch--;
+					anchMin++;
+				}
+				else
+					anch--;
+			}
+		}
+		return anchMax+anchMin;
 	}
 	
 	/**
@@ -388,8 +385,7 @@ public class Figura {
 	public boolean esHomotetica(Figura f){
 		// TODO 
 		// NOTA: No se puede utilizar la comparacion entre Strings.
-		// Mejorar un poco el codigo??
-				
+		
 		boolean esH=false;
 		boolean usado=false;
 		if(this.superficie()<f.superficie()){
@@ -405,16 +401,18 @@ public class Figura {
 		else if(f.superficie()<this.superficie() && !usado){
 			usado=true;
 			while(f.superficie()<this.superficie()){
-			f.homotecia2();
-			if(this.getTrazos().equals(f.getTrazos()))
-				esH=true;
-			else
-				esH=false;
+				f.homotecia2();
+				if(this.getTrazos().equals(f.getTrazos()))
+					esH=true;
+				else
+					esH=false;
 			}
 		}
 		else{
 			if(this.getTrazos().equals(f.getTrazos()) && !usado)
 				esH=true;
+			else
+				esH=false;
 		}
 		return esH;
 	}
@@ -435,22 +433,16 @@ public class Figura {
 			this.homotecia2();
 			usado=true;
 		}
-		while(f.superficie()<this.superficie() && !usado){
-			f.homotecia2();
+		if(!usado && f.superficie()<this.superficie()){
+			while(f.superficie()<this.superficie()){
+				f.homotecia2();
+				usado=true;
+			}
 		}
-		if(this.superficie()==(f.superficie())){
+		else{
 			while(cont<4 && !esH){
 				if(this.getTrazos().equals(f.getTrazos()))
 					esH=true;
-				else
-					f.girarDerecha();
-				cont++;
-			}
-		}
-		if(this.superficie()==f.superficie()){
-			while(cont<4 && !esH){
-				if(this.trazos.equals(f.trazos)){
-					esH=true;}
 				else
 					this.girarDerecha();
 				cont++;
@@ -463,9 +455,13 @@ public class Figura {
 	 * Devuelve una copia exacta a la figura actual
 	 */
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	protected Object clone(){
 		// TODO Auto-generated method stub
-		return super.clone();
+		try{
+			return super.clone();
+		} catch (CloneNotSupportedException e){
+			return null;
+		}
 	}
 
 	/** 

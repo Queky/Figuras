@@ -55,10 +55,15 @@ public class GestorFiguras {
 	 */
 	public boolean existe(String nombre){
 		//TODO
-		if(gFigura.containsKey(nombre))
-			return true;
-		else
-			return false;
+		Enumeration<String> e = gFigura.keys();
+		boolean existe = false;
+		String n;
+		while(e.hasMoreElements()){
+			n = e.nextElement();
+			if(n == nombre)
+				existe = true;
+		}
+		return existe;
 	}
 	
 	/**
@@ -111,10 +116,13 @@ public class GestorFiguras {
 		ArrayList<Figura> listaFiguras = new ArrayList<Figura>();
 		Enumeration<Figura> e = gFigura.elements();
 		Figura f;
+		f=e.nextElement();
 		while(e.hasMoreElements()){
-			f=e.nextElement();
-			if(f.esSemejante(figura))
+			if(f.esSemejante(figura)){
 				listaFiguras.add(f);
+				f=e.nextElement();
+			}else
+				f=e.nextElement();
 		}
 		return listaFiguras;
 	}

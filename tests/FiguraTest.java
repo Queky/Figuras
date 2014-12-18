@@ -51,10 +51,30 @@ public class FiguraTest {
 		assertEquals(t.getTrazos(), a.getTrazos());
 		Figura t1 = new Figura("");
 		t1.anadirTrazo('D', true);
-		t1.anadirTrazo('B');
-		t1.anadirTrazo('I');
+		t1.anadirTrazo('B', false);
+		t1.anadirTrazo('I', false);
 		t1.anadirTrazo('S',false);
-		assertEquals(t.getTrazos(), a.getTrazos());
+		assertEquals(t1.getTrazos(), a.getTrazos());
+		Figura t2 = new Figura("");
+		t2.anadirTrazo('B', true);
+		t2.anadirTrazo('D', false);
+		t2.anadirTrazo('B', false);
+		t2.anadirTrazo('D', false);
+		Figura prueba1 = new Figura("BDBD");
+		assertEquals(t2.getTrazos(), prueba1.getTrazos());
+		Figura t3 = new Figura("");
+		t3.anadirTrazo('I', true);
+		t3.anadirTrazo('B', false);
+		Figura prueba2 = new Figura("IB");
+		assertEquals(t3.getTrazos(), prueba2.getTrazos());
+		Figura t4 = new Figura("");
+		t4.anadirTrazo('S', true);
+		t4.anadirTrazo('D', false);
+		Figura prueba3 = new Figura("SD");
+		assertEquals(t4.getTrazos(), prueba3.getTrazos());
+		
+
+		
 		
 	}
 	@Test
@@ -80,6 +100,8 @@ public class FiguraTest {
 		Figura t = new Figura("DBS");
 		t.sustituir('S', "IS");
 		assertEquals(t.getTrazos(), a.getTrazos());
+		Figura t1 = new Figura("");
+		t1.sustituir('S', "");
 	}
 	@Test
 	public void testGirarDerecha(){
@@ -99,8 +121,8 @@ public class FiguraTest {
 	}
 	@Test
 	public void testLongitud(){
-		assertTrue(a.longitud() == 4);
-		assertTrue(b.longitud() == 8);
+		assertEquals(a.longitud(), 4);
+		assertEquals(b.longitud(), 8);
 		assertFalse(a.longitud() != 4);
 		
 	}
@@ -108,16 +130,32 @@ public class FiguraTest {
 	public void testAltura(){
 		assertEquals(a.altura(), 1);
 		assertEquals(b.altura(), 2);
-		assertEquals(c.altura(), 3);		
+		assertEquals(c.altura(), 3);
+		Figura f = new Figura("SSSBBBBBB");
+		assertEquals(f.altura(), 6);
+		Figura f1 = new Figura("SSSBBBBBBB");
+		assertEquals(f1.altura(), 7);
+		Figura f2 = new Figura("BBBSSSSSS");
+		assertEquals(f2.altura(), 6);
+		Figura f3 = new Figura("BBBSSSSSSS");
+		assertEquals(f3.altura(), 7);
+		Figura f4 = new Figura("SSS");
+		assertEquals(f4.altura(), 3);
 	}
 	
 	@Test
 	public void testEsHomotetica(){
 		assertTrue(a.esHomotetica(b));
+		assertTrue(b.esHomotetica(a));
+		assertFalse(a.esHomotetica(c));
+		assertTrue(d.esHomotetica(d));
+		Figura f = new Figura("DDDDDDDDDDDDDDDDBBBBBBBBIIIISSSS");
+		assertFalse(a.esHomotetica(f));
+		assertTrue(a.esHomotetica(a));
 	}
 	
 	@Test
-	public void superficie(){
+	public void testSuperficie(){
 		assertEquals(a.superficie(), 1);
 		assertEquals(b.superficie(), 4);
 		assertEquals(c.superficie(), 12);
@@ -126,15 +164,42 @@ public class FiguraTest {
 
 	@Test
 	public void testAnchura(){
-		assertTrue(a.anchura() == 1);
-		assertTrue(b.anchura() == 2);
-		assertFalse(a.altura() != 1);
-		
+		assertEquals(a.anchura(), 1);
+		assertEquals(b.anchura(), 2);
+		Figura f = new Figura ("DDDIIIIII");
+		assertEquals(f.anchura(), 6);
+		Figura f1 = new Figura ("DDDIIIIIII");
+		assertEquals(f1.anchura(), 7);
+		Figura f2 = new Figura ("IIIDDDDDD");
+		assertEquals(f2.anchura(), 6);
+		Figura f3 = new Figura("IIIDDDDDDD");
+		assertEquals(f3.anchura(), 7);
 	}
+	
 	@Test
 	public void testEsSemejante(){
 		Figura t = new Figura("BISD");
 		assertTrue(t.esSemejante(b));
+		assertTrue(a.esSemejante(b));
+		assertTrue(b.esSemejante(a));
+		t.girarDerecha();
+		assertTrue(t.esSemejante(t));
+		Figura f = new Figura("BBISSSSSSD");
+		assertFalse(f.esSemejante(a));
+		Figura f1 = new Figura("BBBBDD");
+		Figura f2 = new Figura("DBDBBB");
+		assertFalse(f1.esSemejante(f2));
+	}
+	
+	@Test
+	public void testClone() throws CloneNotSupportedException{
+		Figura f = (Figura) a.clone();
+		assertEquals(f, a);
+	}
+	
+	@Test
+	public void testToString(){
+		String n = a.getNombre().toString();
 		
 	}
 }
