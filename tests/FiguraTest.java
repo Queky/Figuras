@@ -99,11 +99,24 @@ public class FiguraTest {
 	}
 	@Test
 	public void testAltura(){
-		assertTrue(a.altura() == 1);
-		assertTrue(b.altura() == 2);
-		assertTrue(c.altura() == 3);
-		assertFalse(a.altura() != 1);
+		assertEquals(a.altura(), 1);
+		assertEquals(b.altura(), 2);
+		assertEquals(c.altura(), 3);
+		assertNotEquals(a.altura(), 2);
 		
+	}
+	
+	@Test
+	public void testEsHomotetica(){
+		assertTrue(a.esHomotetica(b));
+	}
+	
+	@Test
+	public void superficie(){
+		assertEquals(a.superficie(), 1);
+		assertEquals(b.superficie(), 4);
+		assertEquals(c.superficie(), 12);
+		assertEquals(d.superficie(), 1);
 	}
 	
 	
