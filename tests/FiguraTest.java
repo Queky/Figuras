@@ -106,7 +106,6 @@ public class FiguraTest {
 	}
 	@Test
 	public void testAltura(){
-<<<<<<< HEAD
 		assertEquals(a.altura(), 1);
 		assertEquals(b.altura(), 2);
 		assertEquals(c.altura(), 3);
@@ -126,14 +125,7 @@ public class FiguraTest {
 		assertEquals(c.superficie(), 12);
 		assertEquals(d.superficie(), 1);
 	}
-	
-	
-=======
-		assertTrue(a.altura() == 1);
-		assertTrue(b.altura() == 2);
-		assertFalse(a.altura() != 1);
-		
-	}
+
 	@Test
 	public void testAnchura(){
 		assertTrue(a.anchura() == 1);
@@ -147,11 +139,4 @@ public class FiguraTest {
 		assertTrue(t.esSemejante(b));
 		
 	}
-	@Test
-	public void testSuperficie(){
-		assertTrue(a.superficie() == 1);
-		//assert
-		
-	}
->>>>>>> origin/ulimas-modificaciones
 }
