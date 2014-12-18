@@ -304,12 +304,16 @@ public class Figura {
 					alt++;
 				}
 			if(t.equals(new Trazo('B'))){
+<<<<<<< HEAD
 				usado=false;
 				if(altMax==alt && alt!=0){
 					alt--;
 					usado=true;
 				}
 				if(altMax==Math.abs(alt) && !usado){
+=======
+				if(altMax==Math.abs(alt)){
+>>>>>>> origin/ulimas-modificaciones
 					alt--;
 					altMax++;
 					usado=true;
@@ -341,8 +345,12 @@ public class Figura {
 					anch++;
 				}
 			if(t.equals(new Trazo('I'))){
+<<<<<<< HEAD
 				usado=false;
 				if(anchMax==anch && anch!=0){
+=======
+				if(anchMax==Math.abs(anch)){
+>>>>>>> origin/ulimas-modificaciones
 					anch--;
 					usado = true;
 				}
@@ -438,6 +446,7 @@ public class Figura {
 		while(f.superficie()<this.superficie() && !usado){
 			f.homotecia2();
 		}
+<<<<<<< HEAD
 		if(this.superficie()==(f.superficie())){
 			while(cont<4 && !esH){
 				if(this.getTrazos().equals(f.getTrazos()))
@@ -446,6 +455,15 @@ public class Figura {
 					f.girarDerecha();
 				cont++;
 			}
+=======
+		if(this.superficie()==f.superficie()){
+			while(cont<4 && !esH){
+				if(this.trazos.equals(f.trazos)){
+					esH=true;}else{
+				this.girarDerecha();
+					}	cont++;
+			}		
+>>>>>>> origin/ulimas-modificaciones
 		}
 		return esH;
 	}

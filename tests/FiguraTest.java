@@ -49,6 +49,13 @@ public class FiguraTest {
 		t.anadirTrazo('I');
 		t.anadirTrazo('S');
 		assertEquals(t.getTrazos(), a.getTrazos());
+		Figura t1 = new Figura("");
+		t1.anadirTrazo('D', true);
+		t1.anadirTrazo('B');
+		t1.anadirTrazo('I');
+		t1.anadirTrazo('S',false);
+		assertEquals(t.getTrazos(), a.getTrazos());
+		
 	}
 	@Test
 	public void testFusionar(){
@@ -99,6 +106,7 @@ public class FiguraTest {
 	}
 	@Test
 	public void testAltura(){
+<<<<<<< HEAD
 		assertEquals(a.altura(), 1);
 		assertEquals(b.altura(), 2);
 		assertEquals(c.altura(), 3);
@@ -120,4 +128,30 @@ public class FiguraTest {
 	}
 	
 	
+=======
+		assertTrue(a.altura() == 1);
+		assertTrue(b.altura() == 2);
+		assertFalse(a.altura() != 1);
+		
+	}
+	@Test
+	public void testAnchura(){
+		assertTrue(a.anchura() == 1);
+		assertTrue(b.anchura() == 2);
+		assertFalse(a.altura() != 1);
+		
+	}
+	@Test
+	public void testEsSemejante(){
+		Figura t = new Figura("BISD");
+		assertTrue(t.esSemejante(b));
+		
+	}
+	@Test
+	public void testSuperficie(){
+		assertTrue(a.superficie() == 1);
+		//assert
+		
+	}
+>>>>>>> origin/ulimas-modificaciones
 }
