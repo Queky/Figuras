@@ -227,8 +227,8 @@ public class Figura {
 	public void girarDerecha(){
 		//TODO
 		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
-		int tamañoInicial = tr1.size();
-		for (int i = 0 ; i < tamañoInicial ; i++ ){
+		int tamanoInicial = tr1.size();
+		for (int i = 0 ; i < tamanoInicial ; i++ ){
 			if(tr1.get(i).equals(new Trazo('I'))){
 				tr1.add( new Trazo('B'));
 				}else{
@@ -245,7 +245,7 @@ public class Figura {
 				}
 				}
 			}
-		for (int i = 0 ; i < tamañoInicial ; i++ ){
+		for (int i = 0 ; i < tamanoInicial ; i++ ){
 			tr1.remove(0);
 		}
 		
