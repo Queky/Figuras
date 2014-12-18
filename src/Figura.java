@@ -227,25 +227,36 @@ public class Figura {
 	public void girarDerecha(){
 		//TODO
 		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
-		ListIterator<Trazo> Itr1= tr1.listIterator();
-		LinkedList<Trazo> tr2  = new LinkedList<Trazo>();
-		int pos = 0;
-		while(Itr1.hasNext()){
-			if(Itr1.next().equals(new Trazo('I'))){
-			tr2.add(pos, new Trazo('B'));
+		int tamañoInicial = tr1.size();
+		for (int i = 0 ; i < tamañoInicial ; i++ ){
+			if(tr1.get(i).equals(new Trazo('I'))){
+				tr1.add( new Trazo('B'));
+				}else{
+				if(tr1.get(i).equals(new Trazo('B'))){
+				tr1.add( new Trazo('D'));
+				}else{
+				if(tr1.get(i).equals(new Trazo('D'))){
+				tr1.add(new Trazo('S'));
+				}else{
+				if(tr1.get(i).equals(new Trazo('S'))){
+				tr1.add( new Trazo('I'));
+				}
+				}
+				}
+				}
 			}
-			if(Itr1.next().equals(new Trazo('B'))){
-			tr2.add(pos, new Trazo('D'));
-			}
-			if(Itr1.next().equals(new Trazo('D'))){
-			tr2.add(pos, new Trazo('S'));
-			}
-			if(Itr1.next().equals(new Trazo('S'))){
-			tr2.add(pos, new Trazo('I'));
-			}
-		pos++;
+		for (int i = 0 ; i < tamañoInicial ; i++ ){
+			tr1.remove(0);
 		}
+		
 	}
+	
+		
+		
+		
+			
+		
+	
 	/**
 	 * Aplica una homotecia de factor 2 a la figura
 	 */
