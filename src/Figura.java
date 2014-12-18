@@ -293,6 +293,7 @@ public class Figura {
 		LinkedList<Trazo> traz = (LinkedList<Trazo>) getTrazos();
 		int altMax=0;
 		int alt=0;
+		boolean usado=false;
 		for(Trazo t : traz){
 			if(t.equals(new Trazo('S'))){
 				if(altMax==alt){
@@ -303,11 +304,17 @@ public class Figura {
 					alt++;
 				}
 			if(t.equals(new Trazo('B'))){
-				if(altMax==Math.abs(alt)){
+				usado=false;
+				if(altMax==alt && alt!=0){
+					alt--;
+					usado=true;
+				}
+				if(altMax==Math.abs(alt) && !usado){
 					alt--;
 					altMax++;
+					usado=true;
 				}
-				if(Math.abs(alt)<altMax)
+				if(Math.abs(alt)<altMax && !usado)
 					alt--;
 			}
 		}
@@ -323,6 +330,7 @@ public class Figura {
 		LinkedList<Trazo> traz = (LinkedList<Trazo>) getTrazos();
 		int anchMax=0;
 		int anch=0;
+		boolean usado = false;
 		for(Trazo t : traz){
 			if(t.equals(new Trazo('D'))){
 				if(anchMax==anch){
@@ -333,14 +341,20 @@ public class Figura {
 					anch++;
 				}
 			if(t.equals(new Trazo('I'))){
-				if(anchMax==Math.abs(anch)){
+				usado=false;
+				if(anchMax==anch && anch!=0){
+					anch--;
+					usado = true;
+				}
+				else if(anchMax==Math.abs(anch) && !usado){
 					anch--;
 					anchMax++;
-				}
-				if(Math.abs(anch)<anchMax)
+					usado=true;
+					}
+				else if(Math.abs(anch)<anchMax && !usado)
 					anch--;
+					}
 			}
-		}
 		return anchMax;
 	}
 	
@@ -349,7 +363,8 @@ public class Figura {
 	 * @return superficie de la figura
 	 */
 	public int superficie(){
-		return altura()*anchura();
+		int mult = altura()*anchura();
+		return mult;
 	}
 
 	/**
@@ -381,7 +396,7 @@ public class Figura {
 			usado=true;
 			while(this.superficie()<f.superficie()){
 				this.homotecia2();
-				if(this.getTrazos()==f.getTrazos())
+				if(this.getTrazos().equals(f.getTrazos()))
 					esH=true;
 				else
 					esH=false;
@@ -391,14 +406,14 @@ public class Figura {
 			usado=true;
 			while(f.superficie()<this.superficie()){
 			f.homotecia2();
-			if(this.getTrazos()==f.getTrazos())
+			if(this.getTrazos().equals(f.getTrazos()))
 				esH=true;
 			else
 				esH=false;
 			}
 		}
 		else{
-			if(this.getTrazos()==f.getTrazos() && !usado)
+			if(this.getTrazos().equals(f.getTrazos()) && !usado)
 				esH=true;
 		}
 		return esH;
@@ -412,8 +427,6 @@ public class Figura {
 	 */
 	public boolean esSemejante(Figura f){
 		// TODO
-		// NOTA: No se puede utilizar la comparacion entre Strings.
-		// TERMINAR
 		int cont=0;
 		boolean esH=false;
 		boolean usado=false;
@@ -425,13 +438,14 @@ public class Figura {
 		while(f.superficie()<this.superficie() && !usado){
 			f.homotecia2();
 		}
-		if(this.superficie()==f.superficie()){
-			while(cont<4){
-				if(this.getTrazos()==f.getTrazos())
+		if(this.superficie()==(f.superficie())){
+			while(cont<4 && !esH){
+				if(this.getTrazos().equals(f.getTrazos()))
 					esH=true;
-				this.girarDerecha();
+				else
+					f.girarDerecha();
 				cont++;
-			}		
+			}
 		}
 		return esH;
 	}
