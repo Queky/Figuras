@@ -295,7 +295,7 @@ public class Figura {
 		int altMax=0;
 		int alt=0;
 		for(Trazo t : traz){
-			if(t.equals('S')){
+			if(t.equals(new Trazo('S'))){
 				if(altMax==alt){
 					altMax++;
 					alt++;
@@ -303,7 +303,7 @@ public class Figura {
 				if(alt<altMax)
 					alt++;
 				}
-			if(t.equals('B')){
+			if(t.equals(new Trazo('B'))){
 				if(altMax==Math.abs(alt)){
 					alt--;
 					altMax++;
@@ -326,7 +326,7 @@ public class Figura {
 		int anchMax=0;
 		int anch=0;
 		for(Trazo t : traz){
-			if(t.equals('S')){
+			if(t.equals(new Trazo('S'))){
 				if(anchMax==anch){
 					anchMax++;
 					anch++;
@@ -334,7 +334,7 @@ public class Figura {
 				if(anch<anchMax)
 					anch++;
 				}
-			if(t.equals('B')){
+			if(t.equals(new Trazo('B'))){
 				if(anchMax==Math.abs(anch)){
 					anch--;
 					anchMax++;
@@ -428,11 +428,11 @@ public class Figura {
 			f.homotecia2();
 		}
 		if(this.superficie()==f.superficie()){
-			while(cont<4){
-				if(this.getTrazos()==f.getTrazos())
-					esH=true;
+			while(cont<4 && !esH){
+				if(this.trazos.equals(f.trazos)){
+					esH=true;}else{
 				this.girarDerecha();
-				cont++;
+					}	cont++;
 			}		
 		}
 		return esH;
