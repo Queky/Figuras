@@ -108,9 +108,7 @@ public class FiguraTest {
 	public void testAltura(){
 		assertEquals(a.altura(), 1);
 		assertEquals(b.altura(), 2);
-		assertEquals(c.altura(), 3);
-		assertNotEquals(a.altura(), 2);
-		
+		assertEquals(c.altura(), 3);		
 	}
 	
 	@Test
