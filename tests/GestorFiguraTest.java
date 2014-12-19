@@ -50,10 +50,10 @@ public class GestorFiguraTest {
 		gF.guardar(b);
 		gF.guardar(c);
 		gF.guardar(d);		
-		assertNotNull(gF.recuperar(a.getNombre()));
-		assertNotNull(gF.recuperar(b.getNombre()));
-		assertNotNull(gF.recuperar(c.getNombre()));
-		assertNotNull(gF.recuperar(d.getNombre()));
+		assertEquals(gF.recuperar(a.getNombre()), a);
+		assertEquals(gF.recuperar(b.getNombre()), b);
+		assertEquals(gF.recuperar(c.getNombre()), c);
+		assertEquals(gF.recuperar(d.getNombre()), d);
 	}
 	
 	@Test
@@ -90,7 +90,6 @@ public class GestorFiguraTest {
 		gF.guardar(b);
 		gF.guardar(c);
 		gF.guardar(d);
-		// Hay que comparar dos arrays/listas...
 		assertEquals(gF.recuperarLista(nombres).get(0).getNombre(), nombresContenidos.get(0).getNombre());
 		assertEquals(gF.recuperarLista(nombres).get(1).getNombre(), nombresContenidos.get(1).getNombre());
 	}
@@ -105,7 +104,7 @@ public class GestorFiguraTest {
 		Figura f = new Figura("DBI", "nombre6");
 		List<Figura> nombresContenidos = new ArrayList<Figura>();
 		nombresContenidos.add(d);
-		nombresContenidos.add(f);
+		nombresContenidos.add(e);
 		assertEquals(nombresContenidos.get(0).getTrazos(), gF.recuperarIguales(f).get(0).getTrazos());
 		assertEquals(nombresContenidos.get(1).getTrazos(), gF.recuperarIguales(f).get(1).getTrazos());
 	}

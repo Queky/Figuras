@@ -141,6 +141,12 @@ public class FiguraTest {
 		assertEquals(f3.altura(), 7);
 		Figura f4 = new Figura("SSS");
 		assertEquals(f4.altura(), 3);
+		Figura f5 = new Figura("");
+		assertEquals(f5.altura(), 0);
+		Figura f6 = new Figura ("BBS");
+		assertEquals(f6.altura(), 2);
+		Figura f7 = new Figura("SSB");
+		assertEquals(f7.altura(), 2);
 	}
 	
 	@Test
@@ -151,6 +157,7 @@ public class FiguraTest {
 		assertTrue(d.esHomotetica(d));
 		Figura f = new Figura("DDDDDDDDDDDDDDDDBBBBBBBBIIIISSSS");
 		assertFalse(a.esHomotetica(f));
+		assertFalse(f.esHomotetica(a));
 		assertTrue(a.esHomotetica(a));
 	}
 	
@@ -194,12 +201,12 @@ public class FiguraTest {
 	@Test
 	public void testClone() throws CloneNotSupportedException{
 		Figura f = (Figura) a.clone();
-		assertEquals(f, a);
+		assertEquals(f.getTrazos(), a.getTrazos());
 	}
 	
 	@Test
 	public void testToString(){
-		String n = a.getNombre().toString();
-		
+		String n1 = "DBIS";
+		assertEquals(n1, a.toString());
 	}
 }

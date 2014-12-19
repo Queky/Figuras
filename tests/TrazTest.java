@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class TrazoTest {
+public class TrazTest {
 
 	Trazo d, b, i, s;
 	@Before
@@ -25,7 +25,7 @@ public class TrazoTest {
 		assertNotNull(new Trazo('B'));
 		try{
 			Trazo t = new Trazo('X');
-			fail("No se debe permitir trazos que no sean D, B, I — S");
+			fail("No se debe permitir trazos que no sean D, B, I ï¿½ S");
 		}
 		catch(IllegalArgumentException ex){
 			assertTrue(true);

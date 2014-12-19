@@ -281,15 +281,9 @@ public class Figura {
 		int altMax=0;
 		int altMin=0;
 		int alt=0;
-		boolean primeraVez = false;
 		for(Trazo t : traz){
 			if(t.equals(new Trazo('S'))){
-				if(alt==0 && alt==altMax && !primeraVez){
-					altMax++;
-					alt++;
-					primeraVez=true;
-				}
-				else if(alt==altMax && alt>=0 && primeraVez){
+				if(alt==altMax){
 					altMax++;
 					alt++;
 				}
@@ -297,12 +291,7 @@ public class Figura {
 					alt++;
 			}
 			else if(t.equals(new Trazo('B'))){
-				if(alt==0 && Math.abs(alt)==altMin && !primeraVez){
-					altMin++;
-					alt--;
-					primeraVez=true;
-				}
-				else if(Math.abs(alt)==altMin || alt<=0 && primeraVez){
+				if(Math.abs(alt)==altMin){
 					alt--;
 					altMin++;
 				}
@@ -323,28 +312,16 @@ public class Figura {
 		int anchMax=0;
 		int anchMin=0;
 		int anch=0;
-		boolean primeraVez = false;
 		for(Trazo t : traz){
-			if(t.equals(new Trazo('D'))){
-				if(anch==0 && anch==anchMax && !primeraVez){
-					anchMax++;
-					anch++;
-					primeraVez=true;
-				}
-				else if(anch==anchMax && anch>=0 && primeraVez){
+			if(t.equals(new Trazo('D')))
+			if(anch==anchMax){
 					anchMax++;
 					anch++;
 				}
 				else
 					anch++;
-			}
-			else if(t.equals(new Trazo('I'))){
-				if(anch==0 && Math.abs(anch)==anchMin && !primeraVez){
-					anchMin++;
-					anch--;
-					primeraVez=true;
-				}
-				else if(Math.abs(anch)==anchMin || anch<=0 && primeraVez){
+			if(t.equals(new Trazo('I'))){
+				if(Math.abs(anch)==anchMin){
 					anch--;
 					anchMin++;
 				}
@@ -385,35 +362,19 @@ public class Figura {
 	public boolean esHomotetica(Figura f){
 		// TODO 
 		// NOTA: No se puede utilizar la comparacion entre Strings.
-		
 		boolean esH=false;
-		boolean usado=false;
-		if(this.superficie()<f.superficie()){
-			usado=true;
-			while(this.superficie()<f.superficie()){
+		int mayor = Math.max(this.superficie(), f.superficie());
+		int menor = Math.min(this.superficie(), f.superficie());
+		while(menor<mayor){
 				this.homotecia2();
-				if(this.getTrazos().equals(f.getTrazos()))
+				menor = Math.min(this.superficie(), f.superficie());
+			if(this.getTrazos().equals(f.getTrazos()))
 					esH=true;
 				else
 					esH=false;
 			}
-		}
-		else if(f.superficie()<this.superficie() && !usado){
-			usado=true;
-			while(f.superficie()<this.superficie()){
-				f.homotecia2();
-				if(this.getTrazos().equals(f.getTrazos()))
-					esH=true;
-				else
-					esH=false;
-			}
-		}
-		else{
-			if(this.getTrazos().equals(f.getTrazos()) && !usado)
+		if(this.getTrazos().equals(f.getTrazos()) && !esH)
 				esH=true;
-			else
-				esH=false;
-		}
 		return esH;
 	}
 	
@@ -453,15 +414,13 @@ public class Figura {
 	
 	/**
 	 * Devuelve una copia exacta a la figura actual
+	 * @throws CloneNotSupportedException 
 	 */
 	@Override
-	protected Object clone(){
+	protected Object clone() throws CloneNotSupportedException{
 		// TODO Auto-generated method stub
-		try{
-			return super.clone();
-		} catch (CloneNotSupportedException e){
-			return null;
-		}
+		Figura clone = new Figura(this.toString());
+		return clone;
 	}
 
 	/** 
@@ -470,6 +429,12 @@ public class Figura {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return super.toString();
+		LinkedList<Trazo> tr1 = (LinkedList<Trazo>)getTrazos();
+		ListIterator<Trazo> Itr1= tr1.listIterator();
+		String trazos = "";
+		while(Itr1.hasNext()){
+			trazos = trazos + Itr1.next().toString();
+		}
+		return trazos;
 	}
 }
